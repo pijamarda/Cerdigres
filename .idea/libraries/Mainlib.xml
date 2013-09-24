@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Mainlib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Cerdigres/libs/bodyeditor-loader.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Cerdigres/libs/gdx-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Cerdigres/libs/bodyeditor-loader-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Cerdigres/libs/gdx.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

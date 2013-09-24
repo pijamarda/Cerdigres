@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="HTMLlib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Cerdigres-html/war/WEB-INF/lib/gdx-backend-gwt-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Cerdigres-html/war/WEB-INF/lib/gdx-backend-gwt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Cerdigres-html/war/WEB-INF/lib/gwt-servlet.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
