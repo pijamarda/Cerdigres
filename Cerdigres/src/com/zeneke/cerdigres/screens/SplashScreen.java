@@ -48,7 +48,7 @@ public class SplashScreen implements Screen
 		splashImage.addAction(Actions.fadeIn(2f));
         //he eliminado el fade in fade out
         //Actions.fadeOut( 0.001f ), Actions.fadeIn( 2f ),
-		splashImage.addAction( Actions.sequence(Actions.run(onSplashFinishedRunnable)) );
+		splashImage.addAction(Actions.run(onSplashFinishedRunnable));
 		
 		stage.addActor(splashImage);
 	}
@@ -59,8 +59,8 @@ public class SplashScreen implements Screen
 		public void run() {
 			// TODO Auto-generated method stub
             //Descartamos el menu por ahora, llamando a la ventana de juego directamente
-			//game.setScreen(new MenuScreen(game));
-            game.setScreen(new MainGameScreen(game));
+			game.setScreen(new MenuPrincipalScreen(game));
+            //game.setScreen(new MainGameScreen(game));
 		}
 	};
 

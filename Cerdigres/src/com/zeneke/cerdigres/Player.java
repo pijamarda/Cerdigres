@@ -13,5 +13,6 @@ public class Player {
 	}
 
     public String getNombre() {return nombre;}
+    public boolean esHumano() {return humano;}
 
 }

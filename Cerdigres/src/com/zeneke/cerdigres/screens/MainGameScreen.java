@@ -22,6 +22,11 @@ public class MainGameScreen implements Screen
 	
 	public static final int NUMFICHAS = 16;
     public static final int TAMTABLERO = 4;
+    public static final int ALTO_TABLAS = 50;
+    public static final int ANCHO_TABLAS = 50;
+    public static final int ALTO_FICHAS = 50;
+    public static final int ANCHO_FICHAS = 50;
+
     MainCerdigres game;
 	Stage stage;
     ImageButton[][] fichasTablero;
@@ -39,15 +44,19 @@ public class MainGameScreen implements Screen
     boolean tablero_bloqueado=true;
     boolean fichas_bloqueado=false;
 
+    boolean esHumano;
+
     Table mainTable;
     Table tablaTablero;
     Table tablaFichas;
 	
-	public MainGameScreen(MainCerdigres game)
+	public MainGameScreen(MainCerdigres game, boolean vsPlayer)
     {
 		this.game = game;
         fichasTablero = new ImageButton[TAMTABLERO][TAMTABLERO];
         eleccionFichas = new ImageButton[NUMFICHAS];
+
+        esHumano = vsPlayer;
 
         jugadores = new Player[2];
         tablero = new Tablero();
@@ -55,7 +64,8 @@ public class MainGameScreen implements Screen
         //true indica que los 2 son humanos
         //TODO: Ojo que ahora mismo los nombre se asignan de manera fija, es decir, nombre1 siempre va a ser el jugador 1
         jugadores[0] = new Player("Alex", true);
-        jugadores[1] = new Player("Fer", true);
+        if (esHumano) jugadores[1] = new Player("Fer", true);
+        else jugadores[1] = new Player("CPU", false);
         Random randomGen = new Random();
         //definimos aleatoriamiente si empieza el jugador 1 o 2
         turno = randomGen.nextInt(2);
@@ -71,6 +81,14 @@ public class MainGameScreen implements Screen
 		stage.act(delta);
 		stage.draw();
 //		Table.drawDebug(stage);
+        //Aqui es la CPU quien toma la decision de colocar ficha
+        if(!jugadores[turno].esHumano())
+        {
+            exitButton.setText(Integer.toString(Gdx.input.getX()));
+            eleccionFichas[4].toggle();
+            eleccionFichas[4].toggle();
+
+        }
 	}
 
 	@Override
@@ -107,13 +125,26 @@ public class MainGameScreen implements Screen
 			
 		});
 
+        exitButton.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                // TODO Auto-generated method stub
+                Gdx.app.exit();
+
+                return true;
+            }
+
+        });
+
         for (int i=0; i<TAMTABLERO; i++)
             for (int j=0; j<TAMTABLERO; j++)
             {
                 String name = Integer.toString(i)+Integer.toString(j);
                 ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle(Assets.skin.get(Button.ButtonStyle.class));
-                style.imageUp = new TextureRegionDrawable(Assets.botonPirata);
-                style.imageDown = new TextureRegionDrawable(Assets.botonPirataDown);
+                //style.imageUp = new TextureRegionDrawable(Assets.botonPirata);
+                //style.imageDown = new TextureRegionDrawable(Assets.botonPirataDown);
                 fichasTablero[i][j] = new ImageButton(style);
                 fichasTablero[i][j].setName(name);
                 fichasTablero[i][j].addListener( new InputListener()
@@ -207,31 +238,27 @@ public class MainGameScreen implements Screen
 //		tablaTablero.debug(); 
 		//tablaTablero.add(startGameButton).width(150).height(50);
         labelTurnoJugador = new Label("Empieza eligiendo ficha: "+ jugadores[turno].getNombre(), Assets.skin);
-        labelTurnoJugador.setPosition(0,0);
+        labelTurnoJugador.setPosition(0,550);
+
         stage.addActor(labelTurnoJugador);
+
+        exitButton.setSize(50,50);
+        exitButton.setPosition(400,550);
+        stage.addActor(exitButton);
+
         //tablaTablero.add(labelTurnoJugador);
         tablaTablero.row();
-        tablaTablero.add(fichasTablero[0][0]).width(50).height(50);
-        tablaTablero.add(fichasTablero[0][1]).width(50).height(50);
-        tablaTablero.add(fichasTablero[0][2]).width(50).height(50);
-        tablaTablero.add(fichasTablero[0][3]).width(50).height(50);
-		tablaTablero.row();
-        tablaTablero.add(fichasTablero[1][0]).width(50).height(50);
-        tablaTablero.add(fichasTablero[1][1]).width(50).height(50);
-        tablaTablero.add(fichasTablero[1][2]).width(50).height(50);
-        tablaTablero.add(fichasTablero[1][3]).width(50).height(50);
-        tablaTablero.row();
-        tablaTablero.add(fichasTablero[2][0]).width(50).height(50);
-        tablaTablero.add(fichasTablero[2][1]).width(50).height(50);
-        tablaTablero.add(fichasTablero[2][2]).width(50).height(50);
-        tablaTablero.add(fichasTablero[2][3]).width(50).height(50);
-        tablaTablero.row();
-        tablaTablero.add(fichasTablero[3][0]).width(50).height(50);
-        tablaTablero.add(fichasTablero[3][1]).width(50).height(50);
-        tablaTablero.add(fichasTablero[3][2]).width(50).height(50);
-        tablaTablero.add(fichasTablero[3][3]).width(50).height(50);
+        for (int i=0; i< TAMTABLERO; i++)
+        {
+            for (int j=0; j< TAMTABLERO; j++)
+            {
+                tablaTablero.add(fichasTablero[i][j]).width(ANCHO_TABLAS).height(ALTO_TABLAS);
+            }
+            tablaTablero.row();
+        }
 		//tablaTablero.add(optionsButton).width(150).height(50).padTop(10);
-		tablaTablero.row();
+
+
 		//table.add(exitButton).width(150).height(50).padTop(10);
 		//stage.addActor(backImage);
         tablaTablero.setPosition(0,150);
@@ -241,7 +268,7 @@ public class MainGameScreen implements Screen
         tablaFichas.setPosition(0,-100);
         for (int i=0; i<NUMFICHAS; i++)
         {
-            tablaFichas.add(eleccionFichas[i]).width(75).height(75);
+            tablaFichas.add(eleccionFichas[i]).width(ANCHO_FICHAS).height(ALTO_FICHAS).pad(15);
             if ((i+1)%4 == 0)
                 tablaFichas.row();
         }

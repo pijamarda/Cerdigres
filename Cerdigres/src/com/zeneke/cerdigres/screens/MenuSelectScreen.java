@@ -13,15 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.zeneke.cerdigres.Assets;
 import com.zeneke.cerdigres.MainCerdigres;
 
-public class MenuScreen implements Screen
+public class MenuSelectScreen implements Screen
 {
     MainCerdigres game;
     Stage stage;
-    TextButton startGameButton;
-    TextButton optionsButton;
-    TextButton exitButton;
+    TextButton vsCPUButton;
+    TextButton vsPlayerButton;
+    TextButton backButton;
 
-    public MenuScreen(MainCerdigres game) {
+    public MenuSelectScreen(MainCerdigres game) {
         this.game = game;
     }
 
@@ -50,31 +50,42 @@ public class MenuScreen implements Screen
 
         Table table = new Table(Assets.skin);
 
-        startGameButton = new TextButton("New Game", Assets.skin);
-        optionsButton = new TextButton("Options", Assets.skin);
-        exitButton = new TextButton("Exit", Assets.skin);
+        vsCPUButton = new TextButton("vs CPU", Assets.skin);
+        vsPlayerButton = new TextButton("vs Jugador", Assets.skin);
+        backButton = new TextButton("Volver", Assets.skin);
         Image backImage = new Image(Assets.backgroundTexture);
 
-        startGameButton.addListener(new InputListener() {
+        vsPlayerButton.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 // TODO Auto-generated method stub
-                game.setScreen(new MainGameScreen(game));
-
+                game.setScreen(new MainGameScreen(game,true));
                 return true;
             }
 
         });
 
-        exitButton.addListener(new InputListener() {
+        vsCPUButton.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 // TODO Auto-generated method stub
-                Gdx.app.exit();
+                game.setScreen(new MainGameScreen(game,false));
+                return true;
+            }
+
+        });
+
+        backButton.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                // TODO Auto-generated method stub
+                game.setScreen(new MenuPrincipalScreen(game));
 
                 return true;
             }
@@ -83,11 +94,11 @@ public class MenuScreen implements Screen
 
         table.setFillParent(true);
 //		table.debug();
-        table.add(startGameButton).width(150).height(50);
+        table.add(vsPlayerButton).width(150).height(50);
         table.row();
-        //table.add(optionsButton).width(150).height(50).padTop(10);
-        //table.row();
-        table.add(exitButton).width(150).height(50).padTop(10);
+        table.add(vsCPUButton).width(150).height(50).padTop(10);
+        table.row();
+        table.add(backButton).width(150).height(50).padTop(10);
 
         stage.addActor(backImage);
         stage.addActor(table);
