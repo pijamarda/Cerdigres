@@ -9,9 +9,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11a36785-6d52-4ff8-a307-93e70ce4a3f3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cerdigres-desktop/src/com/zeneke/cerdigres/Main.java" afterPath="$PROJECT_DIR$/Cerdigres-desktop/src/com/zeneke/cerdigres/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="11a36785-6d52-4ff8-a307-93e70ce4a3f3" name="Default" comment="actualizacion desde el PC del curro">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cerdigres/src/MainCerdigres.gwt.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MainGameScreen.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MenuScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="libgdx-scene2d-demo-game-master.iws" />
@@ -49,7 +50,7 @@
     <file path="/Cerdigres.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380056683842" ignored="false" />
     <file path="/MainCerdigres.gwt.xml" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380115307576" ignored="false" />
     <file path="/MainCerdigres.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380115510318" ignored="false" />
-    <file path="/Dummy.txt" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380117874343" ignored="false" />
+    <file path="/Dummy.txt" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380118285723" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,13 +121,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainCerdigres.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainCerdigres.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/MainCerdigres.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="48" selection-start="278" selection-end="278" vertical-scroll-proportion="0.5081522">
+            <state line="11" column="48" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainCerdigres.gwt.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Cerdigres/src/MainCerdigres.gwt.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="38" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,10 +152,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainGameScreen.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainGameScreen.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MainGameScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="35" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.0">
+            <state line="46" column="35" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.23943663">
               <folding />
             </state>
           </provider>
@@ -346,6 +356,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="options.lastSelected" value="vcs.Git" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -555,7 +566,11 @@
       <created>1380117878536</created>
       <updated>1380117878536</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="actualizacion desde el PC del curro">
+      <created>1380118090396</created>
+      <updated>1380118090396</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -582,21 +597,21 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14991482" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25530303" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25530303" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18568996" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -711,7 +726,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cerdigres-android/src/com/zeneke/cerdigres/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="36" selection-start="565" selection-end="565" vertical-scroll-proportion="0.53333336" />
+        <state line="16" column="36" selection-start="565" selection-end="565" vertical-scroll-proportion="0.53333336">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/actors/Platforms.java">
@@ -735,13 +754,6 @@
     <entry file="file://$PROJECT_DIR$/Cerdigres-android/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="68" selection-start="882" selection-end="882" vertical-scroll-proportion="0.7">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cerdigres/src/MainCerdigres.gwt.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="38" selection-start="250" selection-end="250" vertical-scroll-proportion="0.11111111">
           <folding />
         </state>
       </provider>
@@ -776,19 +788,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MainGameScreen.java">
+    <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/MainCerdigres.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="35" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.0">
+        <state line="11" column="48" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cerdigres/src/MainCerdigres.gwt.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="38" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/MainCerdigres.java">
+    <entry file="file://$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MainGameScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="48" selection-start="278" selection-end="278" vertical-scroll-proportion="0.5081522">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="46" column="35" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.23943663">
+          <folding />
         </state>
       </provider>
     </entry>
