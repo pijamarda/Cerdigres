@@ -1,7 +1,8 @@
 package com.zeneke.cerdigres;
 
 import com.badlogic.gdx.Game;
-import com.zeneke.cerdigres.screens.MainMenuScreen;
+//import com.zeneke.cerdigres.screens.MenuScreen;
+import com.zeneke.cerdigres.screens.SplashScreen;
 
 
 public class MainCerdigres extends Game {
@@ -10,7 +11,7 @@ public class MainCerdigres extends Game {
 	public void create() {
 		// TODO Auto-generated method stub
 		Assets.load();
-		setScreen(new MainMenuScreen(this));
+		setScreen(new SplashScreen(this));
 	}
 	
 }

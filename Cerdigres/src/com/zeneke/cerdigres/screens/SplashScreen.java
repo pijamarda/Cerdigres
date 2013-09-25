@@ -10,7 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.zeneke.cerdigres.Assets;
 import com.zeneke.cerdigres.MainCerdigres;
 
-public class SplashScreen implements Screen {
+public class SplashScreen implements Screen
+{
 
     MainCerdigres game;
 	Stage stage;
@@ -44,10 +45,10 @@ public class SplashScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		Image splashImage = new Image(Assets.backgroundTexture);
-//		splashImage.addAction(Actions.fadeIn( 2f ));
+		splashImage.addAction(Actions.fadeIn(2f));
         //he eliminado el fade in fade out
         //Actions.fadeOut( 0.001f ), Actions.fadeIn( 2f ),
-		splashImage.addAction( Actions.sequence(  Actions.run(onSplashFinishedRunnable) ) );
+		splashImage.addAction( Actions.sequence(Actions.run(onSplashFinishedRunnable)) );
 		
 		stage.addActor(splashImage);
 	}
@@ -57,7 +58,9 @@ public class SplashScreen implements Screen {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			game.setScreen(new MainMenuScreen(game));
+            //Descartamos el menu por ahora, llamando a la ventana de juego directamente
+			//game.setScreen(new MenuScreen(game));
+            game.setScreen(new MainGameScreen(game));
 		}
 	};
 
