@@ -94,11 +94,11 @@ public class MenuSelectScreen implements Screen
 
         table.setFillParent(true);
 //		table.debug();
-        table.add(vsPlayerButton).width(150).height(50);
+        table.add(vsPlayerButton).width(250).height(100);
         table.row();
-        table.add(vsCPUButton).width(150).height(50).padTop(10);
+        table.add(vsCPUButton).width(250).height(100).padTop(20);
         table.row();
-        table.add(backButton).width(150).height(50).padTop(10);
+        table.add(backButton).width(250).height(100).padTop(20);
 
         stage.addActor(backImage);
         stage.addActor(table);

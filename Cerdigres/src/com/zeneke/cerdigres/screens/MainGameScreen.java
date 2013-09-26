@@ -1,9 +1,11 @@
 package com.zeneke.cerdigres.screens;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.zeneke.cerdigres.Assets;
 import com.zeneke.cerdigres.MainCerdigres;
@@ -24,14 +27,15 @@ import java.util.Random;
 
 public class MainGameScreen implements Screen
 {
-	
+	public static final int ESCALA_FICHAS = 70;
 	public static final int NUMFICHAS = 16;
     public static final int TAMTABLERO = 4;
-    public static final int ALTO_TABLAS = 50;
-    public static final int ANCHO_TABLAS = 50;
-    public static final int ALTO_FICHAS = 50;
-    public static final int ANCHO_FICHAS = 50;
-    public static final int TIEMPO_PAUSITA = 500;
+    public static final int ALTO_TABLAS = ESCALA_FICHAS;
+    public static final int ANCHO_TABLAS = ESCALA_FICHAS;
+    public static final int ALTO_FICHAS = ESCALA_FICHAS;
+    public static final int ANCHO_FICHAS = ESCALA_FICHAS;
+    public static final int TIEMPO_PAUSITA = 800;
+    public static final int UMBRAL_CPU = 1000;
 
     MainCerdigres game;
 	Stage stage;
@@ -54,12 +58,15 @@ public class MainGameScreen implements Screen
     boolean esHumano;
 
     Table mainTable;
+    Table letreros;
+    Table principal;
     Table tablaTablero;
     Table tablaFichas;
-	
+
 	public MainGameScreen(MainCerdigres game, boolean vsPlayer)
     {
 		this.game = game;
+
         fichasTablero = new ImageButton[TAMTABLERO][TAMTABLERO];
         eleccionFichas = new ImageButton[NUMFICHAS];
 
@@ -82,29 +89,29 @@ public class MainGameScreen implements Screen
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		stage.act(delta);
-		stage.draw();
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        stage.act(delta);
+        stage.draw();
 //		Table.drawDebug(stage);
         //Aqui es la CPU quien toma la decision de colocar ficha
         if(!jugadores[turno].esHumano())
         {
+            //pausita();
             mueveCPU();
-            pausita();
         }
-
 	}
 
 
-	@Override
+
+    @Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+    @Override
 	public void show()
     {
 		// TODO Auto-generated method stub
@@ -183,7 +190,7 @@ public class MainGameScreen implements Screen
                                 boton.setStyle(style);
                                 if (tablero.hayCoincidencia())
                                 {
-                                    System.out.println("Fin de la partida: "+ jugadores[turno]);
+                                    System.out.println("Fin de la partida: "+ jugadores[turno].getNombre());
                                     labelTurnoJugador.setText("HA GANADO: "+jugadores[turno].getNombre());
                                     //System.exit(0);
                                     lockFichas();
@@ -246,36 +253,20 @@ public class MainGameScreen implements Screen
 
             });
         }
+        //Diseño de la pantalla principal
+        mainTable = new Table();
+        mainTable.setFillParent(true);
+        principal = new Table();
+        letreros = new Table();
 
-        //mainTable = new Table();
-        //mainTable.setFillParent(true);
-
-
-		tablaTablero.setFillParent(true);
-//		tablaTablero.debug(); 
-		//tablaTablero.add(startGameButton).width(150).height(50);
         labelTurnoJugador = new Label("Empieza eligiendo ficha: "+ jugadores[turno].getNombre(), Assets.skin);
-        //labelTurnoJugador.setPosition(0,550);
-        stage.addActor(labelTurnoJugador);
+        letreros.add(labelTurnoJugador).width(200).align(Align.left).padRight(15).fill().expand();
+        letreros.add(exitButton).width(75).height(50).align(Align.right).right();
+        letreros.row();
+        letreros.add(colocarButton).width(ANCHO_FICHAS + 10).height(ALTO_FICHAS + 10).align(Align.left);
 
-        colocarButton.setSize(ANCHO_FICHAS+10,ALTO_FICHAS+10);
-        //colocarButton.setPosition(10,450);
-        stage.addActor(colocarButton);
+        letreros.row();
 
-        exitButton.setSize(100,50);
-        //exitButton.setPosition(350,550);
-        stage.addActor(exitButton);
-
-        optionsButton.setSize(100,50);
-        optionsButton.setPosition(350,500);
-        //stage.addActor(optionsButton);
-
-        startGameButton.setSize(100,50);
-        startGameButton.setPosition(350,450);
-        //stage.addActor(startGameButton);
-
-        //tablaTablero.add(labelTurnoJugador);
-        tablaTablero.row();
         for (int i=0; i< TAMTABLERO; i++)
         {
             for (int j=0; j< TAMTABLERO; j++)
@@ -289,19 +280,25 @@ public class MainGameScreen implements Screen
 
 		//table.add(exitButton).width(150).height(50).padTop(10);
 		//stage.addActor(backImage);
-        tablaTablero.setPosition(0,150);
-		stage.addActor(tablaTablero);
-
-        tablaFichas.setFillParent(true);
-        tablaFichas.setPosition(0,-100);
+        //tablaTablero.setPosition(0,150);
+		principal.add(tablaTablero);
+        principal.row();
+        //tablaFichas.setFillParent(true);
+        //tablaFichas.setPosition(0,-100);
         for (int i=0; i<NUMFICHAS; i++)
         {
-            tablaFichas.add(eleccionFichas[i]).width(ANCHO_FICHAS).height(ALTO_FICHAS).pad(15);
+            tablaFichas.add(eleccionFichas[i]).width(ANCHO_FICHAS).height(ALTO_FICHAS).pad(5);
             if ((i+1)%4 == 0)
                 tablaFichas.row();
         }
+        principal.row();
+        principal.add(tablaFichas);
+        //stage.addActor(tablaFichas);
 
-        stage.addActor(tablaFichas);
+        mainTable.add(letreros).padTop(20);
+        mainTable.row();
+        mainTable.add(principal).padTop(20).padBottom(20);
+        stage.addActor(mainTable);
         lockTablero();
 
         //lockFichas();
@@ -404,7 +401,7 @@ public class MainGameScreen implements Screen
         ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle(Assets.skin.get(Button.ButtonStyle.class));
 
 
-        style.imageDown = new TextureRegionDrawable(Assets.botonPirataDown);
+        //style.imageDown = new TextureRegionDrawable(Assets.botonPirataDown);
         ImageButton seleccion = new ImageButton(style);
         boolean c1 = tablero.fichas[i].getC1();
         boolean c2 = tablero.fichas[i].getC2();
@@ -479,66 +476,134 @@ public class MainGameScreen implements Screen
     public void mueveCPU()
     {
         int tmp = 0;
-        while (tablero_bloqueado && tmp <NUMFICHAS)
+        boolean forzar_movimiento = false;
+        int check_i = 0;
+        if (!fichas_bloqueado)
         {
-            Random randomGen = new Random();
-            //La CPU escogera fichas aleatoriamente
-            tmp = randomGen.nextInt(NUMFICHAS);
-            //event.getListenerActor().setName("pulsado");
-            debug_cpu(tmp,true);
-            if (tablero.elegirFicha(tmp))
+            while (tablero_bloqueado && tmp <NUMFICHAS && !forzar_movimiento)
             {
-                fichaElegida = tmp;
-                lockFichas();
-                fichas_bloqueado=true;
-                unLockTablero();
-                tablero_bloqueado=false;
-                eleccionFichas[tmp].setColor(Color.DARK_GRAY);
-                cambiarTurno();
-
-                //ImageButton.ImageButtonStyle style = seleccionarStyle(xint, yint);
-                ImageButton.ImageButtonStyle style = eleccionFichas[tmp].getStyle();
-                colocarButton.setStyle(style);
-            }
-
-            if (tmp < NUMFICHAS)tmp++; else break;
-        }
-
-        int x = 0;
-        int y = 0;
-
-        //TODO: ojo que aqui hemos hardcoded el turno de la CPU para que no ponga
-        //TODO: por nosotros
-        while (fichas_bloqueado && turno == 1)
-        {
-            Random randomGen = new Random();
-            //La CPU escogera fichas aleatoriamente
-            x = randomGen.nextInt(TAMTABLERO);
-            y = randomGen.nextInt(TAMTABLERO);
-            if (tablero.colocarFicha(fichaElegida,x,y))
-            {
-                lockTablero();
-                tablero_bloqueado=true;
-                unLockFichas();
-                fichas_bloqueado=false;
-                ImageButton.ImageButtonStyle style = seleccionarStyle(x, y);
-                fichasTablero[x][y].setStyle(style);
-                if (tablero.hayCoincidencia())
+                Random randomGen = new Random();
+                //La CPU escogera fichas aleatoriamente
+                tmp = randomGen.nextInt(NUMFICHAS);
+                //event.getListenerActor().setName("pulsado");
+                //debug_cpu(tmp,true);
+                if (tablero.elegirFicha(tmp))
                 {
-                    System.out.println("Fin de la partida: "+ jugadores[turno]);
-                    labelTurnoJugador.setText("HA GANADO: "+jugadores[turno].getNombre());
-                    //System.exit(0);
+
+                    fichaElegida = tmp;
                     lockFichas();
                     fichas_bloqueado=true;
-                    lockTablero();
-                    tablero_bloqueado=true;
-                    finTableros();
+                    unLockTablero();
+                    tablero_bloqueado=false;
+                    eleccionFichas[tmp].setColor(Color.DARK_GRAY);
+                    cambiarTurno();
+
+                    //ImageButton.ImageButtonStyle style = seleccionarStyle(xint, yint);
+                    ImageButton.ImageButtonStyle style = eleccionFichas[tmp].getStyle();
+                    colocarButton.setStyle(style);
                 }
-                else
+                check_i++;
+                if (tmp < NUMFICHAS)tmp++; else break;
+                if (check_i > UMBRAL_CPU) forzar_movimiento=true;
+            }
+            if (forzar_movimiento)
+            {
+                for (int i=0; i<NUMFICHAS; i++)
                 {
-                    labelTurnoJugador.setText(jugadores[turno].getNombre() + " Elije ficha");
+                    if (tablero.elegirFicha(i))
+                    {
+                        fichaElegida = i;
+                        lockFichas();
+                        fichas_bloqueado=true;
+                        unLockTablero();
+                        tablero_bloqueado=false;
+                        eleccionFichas[i].setColor(Color.DARK_GRAY);
+                        cambiarTurno();
+
+                        //ImageButton.ImageButtonStyle style = seleccionarStyle(xint, yint);
+                        ImageButton.ImageButtonStyle style = eleccionFichas[i].getStyle();
+                        colocarButton.setStyle(style);
+                    }
                 }
             }
+            forzar_movimiento = false;
+        }
+        else if (!tablero_bloqueado)
+        {
+            int x = 0;
+            int y = 0;
+            check_i = 0;
+            //TODO: ojo que aqui hemos hardcoded el turno de la CPU para que no ponga
+            //TODO: por nosotros
+            while (fichas_bloqueado && turno == 1 && !forzar_movimiento)
+            {
+                Random randomGen = new Random();
+                //La CPU escogera fichas aleatoriamente
+                x = randomGen.nextInt(TAMTABLERO);
+                y = randomGen.nextInt(TAMTABLERO);
+                if (tablero.colocarFicha(fichaElegida,x,y))
+                {
+
+                    lockTablero();
+                    tablero_bloqueado=true;
+                    unLockFichas();
+                    fichas_bloqueado=false;
+                    ImageButton.ImageButtonStyle style = seleccionarStyle(x, y);
+                    fichasTablero[x][y].setStyle(style);
+                    if (tablero.hayCoincidencia())
+                    {
+                        System.out.println("Fin de la partida: "+ jugadores[turno].getNombre());
+                        labelTurnoJugador.setText("HA GANADO: "+jugadores[turno].getNombre());
+                        //System.exit(0);
+                        lockFichas();
+                        fichas_bloqueado=true;
+                        lockTablero();
+                        tablero_bloqueado=true;
+                        finTableros();
+                    }
+                    else
+                    {
+                        labelTurnoJugador.setText(jugadores[turno].getNombre() + " Elije ficha");
+                    }
+                }
+                check_i++;
+                if (check_i > UMBRAL_CPU) forzar_movimiento = true;
+            }
+            if (forzar_movimiento)
+            {
+                for (int i=0; i<TAMTABLERO; i++)
+                {
+                    for (int j=0; j< TAMTABLERO; j++)
+                    {
+                        if (tablero.colocarFicha(fichaElegida,i,j))
+                        {
+
+                            lockTablero();
+                            tablero_bloqueado=true;
+                            unLockFichas();
+                            fichas_bloqueado=false;
+                            ImageButton.ImageButtonStyle style = seleccionarStyle(i, j);
+                            fichasTablero[i][j].setStyle(style);
+                            if (tablero.hayCoincidencia())
+                            {
+                                System.out.println("Fin de la partida: "+ jugadores[turno].getNombre());
+                                labelTurnoJugador.setText("HA GANADO: "+jugadores[turno].getNombre());
+                                //System.exit(0);
+                                lockFichas();
+                                fichas_bloqueado=true;
+                                lockTablero();
+                                tablero_bloqueado=true;
+                                finTableros();
+                            }
+                            else
+                            {
+                                labelTurnoJugador.setText(jugadores[turno].getNombre() + " Elije ficha");
+                            }
+                        }
+                    }
+                }
+            }
+            forzar_movimiento = false;
         }
     }
 

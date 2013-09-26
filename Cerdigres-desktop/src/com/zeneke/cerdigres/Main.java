@@ -10,7 +10,7 @@ public class Main {
 		cfg.title = "Cerdigres";
 		cfg.useGL20 = true;
 		cfg.width = 480;
-		cfg.height = 600;
+		cfg.height = 800;
 
 		new LwjglApplication(new MainCerdigres(), cfg);
 	}
