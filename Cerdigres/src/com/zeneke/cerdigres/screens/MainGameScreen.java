@@ -8,12 +8,17 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.zeneke.cerdigres.Assets;
 import com.zeneke.cerdigres.MainCerdigres;
 import com.zeneke.cerdigres.Player;
 import com.zeneke.cerdigres.Tablero;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 
@@ -26,6 +31,7 @@ public class MainGameScreen implements Screen
     public static final int ANCHO_TABLAS = 50;
     public static final int ALTO_FICHAS = 50;
     public static final int ANCHO_FICHAS = 50;
+    public static final int TIEMPO_PAUSITA = 500;
 
     MainCerdigres game;
 	Stage stage;
@@ -34,6 +40,7 @@ public class MainGameScreen implements Screen
 	TextButton startGameButton;
 	TextButton optionsButton;
 	TextButton exitButton;
+    ImageButton colocarButton;
     Label labelTurnoJugador;
     Tablero tablero;
     Player[] jugadores;
@@ -68,8 +75,8 @@ public class MainGameScreen implements Screen
         else jugadores[1] = new Player("CPU", false);
         Random randomGen = new Random();
         //definimos aleatoriamiente si empieza el jugador 1 o 2
-        turno = randomGen.nextInt(2);
-        //
+        //turno = randomGen.nextInt(2);
+        turno = 0;
 	}
 
 	@Override
@@ -84,12 +91,12 @@ public class MainGameScreen implements Screen
         //Aqui es la CPU quien toma la decision de colocar ficha
         if(!jugadores[turno].esHumano())
         {
-            exitButton.setText(Integer.toString(Gdx.input.getX()));
-            eleccionFichas[4].toggle();
-            eleccionFichas[4].toggle();
-
+            mueveCPU();
+            pausita();
         }
+
 	}
+
 
 	@Override
 	public void resize(int width, int height) {
@@ -110,6 +117,10 @@ public class MainGameScreen implements Screen
 		startGameButton = new TextButton("New Game", Assets.skin);
 		optionsButton = new TextButton("Options", Assets.skin);
 		exitButton = new TextButton("Exit", Assets.skin);
+
+        ImageButton.ImageButtonStyle estiloColocar = new ImageButton.ImageButtonStyle(Assets.skin.get(Button.ButtonStyle.class));
+        colocarButton = new ImageButton(estiloColocar);
+
 		Image backImage = new Image(Assets.backgroundTexture);
 		
 		startGameButton.addListener(new InputListener() {
@@ -118,8 +129,7 @@ public class MainGameScreen implements Screen
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				game.setScreen(new GameScreen(game));
-				
+                mueveCPU();
 				return true;
 			}
 			
@@ -152,8 +162,6 @@ public class MainGameScreen implements Screen
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y,int pointer, int button)
                     {
-
-                        // TODO Auto-generated method stub
                         if (!tablero_bloqueado)
                         {
                             String tmp = event.getListenerActor().getName();
@@ -161,6 +169,9 @@ public class MainGameScreen implements Screen
                             String sy = tmp.substring(1,2);
                             int xint = Integer.parseInt(sx);
                             int yint = Integer.parseInt(sy);
+                            //
+
+                            //
                             if (tablero.colocarFicha(fichaElegida,xint,yint))
                             {
                                 lockTablero();
@@ -185,9 +196,12 @@ public class MainGameScreen implements Screen
                                 else
                                 {
                                     labelTurnoJugador.setText(jugadores[turno].getNombre() + " Elije ficha");
+                                    ImageButton.ImageButtonStyle estiloColocar = new ImageButton.ImageButtonStyle(Assets.skin.get(Button.ButtonStyle.class));
+                                    colocarButton.setStyle(estiloColocar);
                                 }
                             }
                         }
+
                         return true;
                     }
 
@@ -209,6 +223,7 @@ public class MainGameScreen implements Screen
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y,int pointer, int button)
                 {
+
                     if (!fichas_bloqueado)
                     {
                         int tmp = Integer.parseInt(event.getListenerActor().getName());
@@ -222,6 +237,8 @@ public class MainGameScreen implements Screen
                             tablero_bloqueado=false;
                             event.getListenerActor().setColor(Color.DARK_GRAY);
                             cambiarTurno();
+                            ImageButton.ImageButtonStyle style = eleccionFichas[tmp].getStyle();
+                            colocarButton.setStyle(style);
                         }
                     }
                     return true;
@@ -238,13 +255,24 @@ public class MainGameScreen implements Screen
 //		tablaTablero.debug(); 
 		//tablaTablero.add(startGameButton).width(150).height(50);
         labelTurnoJugador = new Label("Empieza eligiendo ficha: "+ jugadores[turno].getNombre(), Assets.skin);
-        labelTurnoJugador.setPosition(0,550);
-
+        //labelTurnoJugador.setPosition(0,550);
         stage.addActor(labelTurnoJugador);
 
-        exitButton.setSize(50,50);
-        exitButton.setPosition(400,550);
+        colocarButton.setSize(ANCHO_FICHAS+10,ALTO_FICHAS+10);
+        //colocarButton.setPosition(10,450);
+        stage.addActor(colocarButton);
+
+        exitButton.setSize(100,50);
+        //exitButton.setPosition(350,550);
         stage.addActor(exitButton);
+
+        optionsButton.setSize(100,50);
+        optionsButton.setPosition(350,500);
+        //stage.addActor(optionsButton);
+
+        startGameButton.setSize(100,50);
+        startGameButton.setPosition(350,450);
+        //stage.addActor(startGameButton);
 
         //tablaTablero.add(labelTurnoJugador);
         tablaTablero.row();
@@ -408,7 +436,7 @@ public class MainGameScreen implements Screen
     {
         ImageButton.ImageButtonStyle style = new ImageButton.ImageButtonStyle(Assets.skin.get(Button.ButtonStyle.class));
 
-        style.imageDown = new TextureRegionDrawable(Assets.botonPirataDown);
+        //style.imageDown = new TextureRegionDrawable(Assets.botonPirataDown);
         boolean c1 = tablero.grid[x][y].getC1();
         boolean c2 = tablero.grid[x][y].getC2();
         boolean c3 = tablero.grid[x][y].getC3();
@@ -432,6 +460,103 @@ public class MainGameScreen implements Screen
         if (!c1&&!c2&&!c3&&!c4) style.imageUp = new TextureRegionDrawable(Assets.ffff);
 
         return style;
+    }
+
+    public void debug_posiciones(float x, float y, ImageButton boton, boolean tablero)
+    {
+        if (tablero)
+        {
+            float xint = boton.getX();
+            float yint = boton.getY();
+
+            optionsButton.setText("ficha "+Float.toString(xint) + " " + Float.toString(yint));
+            exitButton.setText("punt " + Float.toString(x) + " "+ Float.toString(y));
+
+        }
+    }
+
+
+    public void mueveCPU()
+    {
+        int tmp = 0;
+        while (tablero_bloqueado && tmp <NUMFICHAS)
+        {
+            Random randomGen = new Random();
+            //La CPU escogera fichas aleatoriamente
+            tmp = randomGen.nextInt(NUMFICHAS);
+            //event.getListenerActor().setName("pulsado");
+            debug_cpu(tmp,true);
+            if (tablero.elegirFicha(tmp))
+            {
+                fichaElegida = tmp;
+                lockFichas();
+                fichas_bloqueado=true;
+                unLockTablero();
+                tablero_bloqueado=false;
+                eleccionFichas[tmp].setColor(Color.DARK_GRAY);
+                cambiarTurno();
+
+                //ImageButton.ImageButtonStyle style = seleccionarStyle(xint, yint);
+                ImageButton.ImageButtonStyle style = eleccionFichas[tmp].getStyle();
+                colocarButton.setStyle(style);
+            }
+
+            if (tmp < NUMFICHAS)tmp++; else break;
+        }
+
+        int x = 0;
+        int y = 0;
+
+        //TODO: ojo que aqui hemos hardcoded el turno de la CPU para que no ponga
+        //TODO: por nosotros
+        while (fichas_bloqueado && turno == 1)
+        {
+            Random randomGen = new Random();
+            //La CPU escogera fichas aleatoriamente
+            x = randomGen.nextInt(TAMTABLERO);
+            y = randomGen.nextInt(TAMTABLERO);
+            if (tablero.colocarFicha(fichaElegida,x,y))
+            {
+                lockTablero();
+                tablero_bloqueado=true;
+                unLockFichas();
+                fichas_bloqueado=false;
+                ImageButton.ImageButtonStyle style = seleccionarStyle(x, y);
+                fichasTablero[x][y].setStyle(style);
+                if (tablero.hayCoincidencia())
+                {
+                    System.out.println("Fin de la partida: "+ jugadores[turno]);
+                    labelTurnoJugador.setText("HA GANADO: "+jugadores[turno].getNombre());
+                    //System.exit(0);
+                    lockFichas();
+                    fichas_bloqueado=true;
+                    lockTablero();
+                    tablero_bloqueado=true;
+                    finTableros();
+                }
+                else
+                {
+                    labelTurnoJugador.setText(jugadores[turno].getNombre() + " Elije ficha");
+                }
+            }
+        }
+    }
+
+    public void pausita()
+    {
+        try
+        {
+            Thread.sleep(TIEMPO_PAUSITA);//sleep for 1000 ms
+        } catch (InterruptedException ie)
+        {
+            System.out.println("I was interrupted!");
+        }
+    }
+
+    public void debug_cpu(int x,boolean ficha)
+    {
+        if (ficha) optionsButton.setText("ficha elegida "+Integer.toString(x) );
+        else optionsButton.setText("ficha elegida "+Integer.toString(x) );
     }
 
 }

@@ -33,8 +33,8 @@ public class MenuPrincipalScreen implements Screen
         stage.act(delta);
         stage.draw();
 //		Table.drawDebug(stage);
-        String texto = Integer.toString(Gdx.input.getX());
-        exitButton.setText(texto);
+        //String texto = Integer.toString(Gdx.input.getX());
+        //exitButton.setText(texto);
     }
 
     @Override
