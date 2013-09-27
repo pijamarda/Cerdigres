@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Libgdx-Scene2d-Game-desktop:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Libgdx_Scene2d_Game_desktop_jar</output-path>
+  <artifact type="jar" name="Cerdigres-Game-desktop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Cerdigres_Game_desktop_jar</output-path>
     <root id="archive" name="Libgdx-Scene2d-Game-desktop.jar">
       <element id="module-output" name="Cerdigres-desktop" />
       <element id="module-output" name="Cerdigres" />

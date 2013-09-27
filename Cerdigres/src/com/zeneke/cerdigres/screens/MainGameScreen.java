@@ -34,7 +34,7 @@ public class MainGameScreen implements Screen
     public static final int ANCHO_TABLAS = ESCALA_FICHAS;
     public static final int ALTO_FICHAS = ESCALA_FICHAS;
     public static final int ANCHO_FICHAS = ESCALA_FICHAS;
-    public static final int TIEMPO_PAUSITA = 800;
+    public static final int TIEMPO_PAUSITA = 1500;
     public static final int UMBRAL_CPU = 1000;
 
     MainCerdigres game;
@@ -86,21 +86,30 @@ public class MainGameScreen implements Screen
         turno = 0;
 	}
 
+    boolean parada = false;
+
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
 
+
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
+        //stage.act(delta);
         stage.draw();
+        //pausita();
 //		Table.drawDebug(stage);
+
+        if (parada) {pausita(); parada=false;}
         //Aqui es la CPU quien toma la decision de colocar ficha
         if(!jugadores[turno].esHumano())
         {
-            //pausita();
+
             mueveCPU();
+            parada = true;
         }
+
+
 	}
 
 
