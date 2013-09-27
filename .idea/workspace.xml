@@ -31,13 +31,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11a36785-6d52-4ff8-a307-93e70ce4a3f3" name="Default" comment="Se ha puesto pausa al movimiento de la CPU&#10;Añadido icono a la version android">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cerdigres-android/res/drawable-hdpi/icono1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cerdigres-android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/Cerdigres-android/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cerdigres-desktop/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/Cerdigres-desktop/src/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MainGameScreen.java" afterPath="$PROJECT_DIR$/Cerdigres/src/com/zeneke/cerdigres/screens/MainGameScreen.java" />
+    <list default="true" id="11a36785-6d52-4ff8-a307-93e70ce4a3f3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="G:\data\proyectos\Cerdigres\.idea\artifacts\Libgdx_Scene2d_Game_desktop_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Cerdigres_Game_desktop_jar.xml" />
     </list>
     <ignored path="libgdx-scene2d-demo-game-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,7 +67,7 @@
     <file path="/Cerdigres.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380056683842" ignored="false" />
     <file path="/MainCerdigres.gwt.xml" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380115307576" ignored="false" />
     <file path="/MainCerdigres.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380193201245" ignored="false" />
-    <file path="/Dummy.txt" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380325359004" ignored="false" />
+    <file path="/Dummy.txt" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380325382978" ignored="false" />
     <file path="/MainGameScreen.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380323480053" ignored="false" />
     <file path="/MenuScreen.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380123946125" ignored="false" />
     <file path="/MenuSelectScreen.java" changelist="11a36785-6d52-4ff8-a307-93e70ce4a3f3" time="1380125057682" ignored="false" />
@@ -666,7 +661,11 @@
       <created>1380196960799</created>
       <updated>1380196960799</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Se ha puesto pausa al movimiento de la CPU&#10;Añadido icono a la version android">
+      <created>1380325392610</created>
+      <updated>1380325392610</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -762,7 +761,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se han añadido los Menus y poder jugar contra la CPU" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se ha puesto pausa al movimiento de la CPU&#10;Añadido icono a la version android" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -779,6 +778,7 @@
     <MESSAGE value="actualizacion desde el PC del curro" />
     <MESSAGE value="final del dia 25/9/2013" />
     <MESSAGE value="Se han añadido los Menus y poder jugar contra la CPU" />
+    <MESSAGE value="Se ha puesto pausa al movimiento de la CPU&#10;Añadido icono a la version android" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
